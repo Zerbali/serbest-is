@@ -1,0 +1,86 @@
+class Song:
+def init(self, title):
+self.title = title
+self.next = None
+
+class Playlist:
+def init(self):
+self.current_song = None
+
+def add_song(self, title):  
+    new_song = Song(title)  
+    if not self.current_song:  
+        self.current_song = new_song  
+        new_song.next = self.current_song  
+    else:  
+        temp = self.current_song  
+        while temp.next != self.current_song:  
+            temp = temp.next  
+        temp.next = new_song  
+        new_song.next = self.current_song  
+
+def display_playlist(self):  
+    if not self.current_song:  
+        print("Playlist is empty.")  
+        return  
+    temp = self.current_song  
+    print("Playlist:")  
+    while True:  
+        print(f"- {temp.title}")  
+        temp = temp.next  
+        if temp == self.current_song:  
+            break  
+
+def next_song(self):  
+    if not self.current_song:  
+        print("Playlist is empty.")  
+        return  
+    self.current_song = self.current_song.next  
+    print(f"Now playing: {self.current_song.title}")  
+
+def remove_song(self, title):  
+    if not self.current_song:  
+        print("Playlist is empty.")  
+        return  
+
+    temp = self.current_song  
+    prev = None  
+
+    while True:  
+        if temp.title == title:  
+            if prev:  
+                prev.next = temp.next  
+            else:  
+                # Removing the first song  
+                if temp.next == self.current_song:  
+                    # Only one song  
+                    self.current_song = None  
+                else:  
+                    # Find last song to update its next pointer  
+                    last = self.current_song  
+                    while last.next != self.current_song:  
+                        last = last.next  
+                    last.next = temp.next  
+                    self.current_song = temp.next  
+            print(f"Removed song: {title}")  
+            return  
+        prev = temp  
+        temp = temp.next  
+        if temp == self.current_song:  
+            break  
+    print(f"Song '{title}' not found in playlist.")
+
+Örnek kullanım:
+
+playlist = Playlist()
+playlist.add_song("Song 1")
+playlist.add_song("Song 2")
+playlist.add_song("Song 3")
+
+playlist.display_playlist()
+
+playlist.next_song()
+playlist.next_song()
+
+playlist.remove_song("Song 2")
+playlist.display_playlist()
